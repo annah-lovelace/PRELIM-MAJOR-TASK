@@ -197,5 +197,22 @@ public class Fraction {
         quotient.setDenominator(den);
         return quotient.reduce(wholeNumVal);
     }
+
+    /**
+     * This part was made by ROXAS, Johan Rickardo on 7 February 2023.
+     * Calculates the greatest common divisor of two numbers, without listing the divisor of either number.
+     * This method uses Euclid's Algorithm.
+     */
+    private void computeGCD() {
+        int remainder = 0;
+        remainder = numerator % denominator;
+        if (remainder == 0)
+            System.out.println("Greatest common divisor: " + denominator);
+        else {
+            numerator = denominator;
+            denominator = remainder;
+            computeGCD();
+        } // end of else
+    } // end of computeGCD method
 } // end of Fraction class
 
