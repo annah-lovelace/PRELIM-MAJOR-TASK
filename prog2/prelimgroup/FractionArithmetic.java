@@ -6,6 +6,11 @@ import java.lang.*;
 public class FractionArithmetic {
     static Scanner keyboard = new Scanner(System.in); // static scanner object to reduce lines of code
 
+    /**
+     * Main entry point of the program
+     * @param args - command line arguments
+     * @param wholeNumVal - whole number evaluation
+     */
     public static void main(String[] args, int wholeNumVal) {
         Fraction fraction = new Fraction(wholeNumVal); //to access the operational methods of Fraction class
         Fraction toDouble = new Fraction(wholeNumVal); //to access toDouble method of Fraction class
