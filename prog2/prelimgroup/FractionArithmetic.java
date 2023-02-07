@@ -4,8 +4,9 @@ import java.util.Scanner;
 import java.lang.*;
 
 public class FractionArithmetic {
+    static Scanner keyboard = new Scanner(System.in); // static scanner object to reduce lines of code
+
     public static void main(String[] args, int wholeNumVal) {
-        Scanner kbd = new Scanner(System.in);
         Fraction fraction = new Fraction(wholeNumVal); //to access the operational methods of Fraction class
         Fraction toDouble = new Fraction(wholeNumVal); //to access toDouble method of Fraction class
         Fraction fraction1 = null;  //declares fraction1 and initializes it to value null
@@ -13,7 +14,7 @@ public class FractionArithmetic {
         int choice = 0;
 
         showIntro();
-        kbd.nextLine();
+        keyboard.nextLine();
 
         do {
             showMenu();
@@ -22,14 +23,14 @@ public class FractionArithmetic {
                 case 1:
                     fraction1 = fraction1(wholeNumVal);
                     System.out.println("Press enter to continue...");
-                    kbd.nextLine();
-                    kbd.nextLine();
+                    keyboard.nextLine();
+                    keyboard.nextLine();
                     break;
                 case 2:
                     fraction2 = fraction2();
                     System.out.println("Press enter to continue...");
-                    kbd.nextLine();
-                    kbd.nextLine();
+                    keyboard.nextLine();
+                    keyboard.nextLine();
                     break;
                 case 3:
                     // outputs the sum of the two fractions
@@ -67,11 +68,10 @@ public class FractionArithmetic {
     }
 
     public static int enterChoice(int min, int max) {
-        Scanner kbd = new Scanner(System.in);
         int choice = 0;
         do {
             System.out.print("Input the number corresponding to your choice: ");
-            choice = kbd.nextInt();
+            choice = keyboard.nextInt();
             if (choice < min || choice > max)
                 System.out.println("Invalid choice. Please ensure that you enter a number from " + min + " to " + max + ".");
         } while (choice < min || choice > max);
@@ -137,7 +137,6 @@ public class FractionArithmetic {
     }
 
     private static int enterFractionData(String part, String fractionInfo) {
-        Scanner keyboard = new Scanner(System.in);
         int input;
         //changed as a method that uses a loop instead of recursion.
         do {
