@@ -72,6 +72,13 @@ public class FractionArithmetic {
         } while (choice < 8);
     }
 
+    /**
+     * T
+     * Reads and validates user input of choice.
+     * @param min minimum value for user choice
+     * @param max maximum value for user choice
+     * @return user input of choice
+     */
     public static int enterChoice(int min, int max) {
         int choice = 0;
         do {
@@ -122,6 +129,12 @@ public class FractionArithmetic {
         return operand2;
     }
 
+    /**
+     * Validates and accepts user input for the numerator and fraction.
+     * @param operand operand of the fraction
+     * @param wholeNumVal whole number fraction
+     * @return
+     */
     private static Fraction enterFraction(String operand, int wholeNumVal) {
         Fraction fraction = null;
         int numerator = 0, denominator;
@@ -129,18 +142,21 @@ public class FractionArithmetic {
             numerator = enterFractionData("numerator", operand);
             denominator = enterFractionData("denominator", operand);
             fraction = new Fraction(numerator, denominator);
-        }
-        catch (NoNumeratorException noNumerator) {
+        } catch (NoNumeratorException noNumerator) {
             fraction = new Fraction(wholeNumVal);
-        }
-        catch (NoDenominatorException noDenominator) {
+        } catch (NoDenominatorException noDenominator) {
             fraction = new Fraction(wholeNumVal);
-        }
-        finally {
+        } finally {
             return fraction;
-        }
-    }
+        } // end of try-catch
+    } // end of enterFraction method
 
+    /**
+     *
+     * @param part
+     * @param fractionInfo
+     * @return
+     */
     private static int enterFractionData(String part, String fractionInfo) {
         int input;
         //changed as a method that uses a loop instead of recursion.
@@ -169,4 +185,4 @@ public class FractionArithmetic {
         } while (part.equalsIgnoreCase("denominator") && input == 0);//loop will continue until denominator becomes zero
         return input;
     }
-}
+} // end of class FractionArithmetic

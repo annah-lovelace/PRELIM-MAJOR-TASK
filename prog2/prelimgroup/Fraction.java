@@ -38,8 +38,7 @@ public class Fraction {
      * @param n The numerator to assign
      */
     public void setNumerator(int n) {
-
-        numerator=n;
+        numerator = n;
     }
 
     /**
@@ -64,7 +63,6 @@ public class Fraction {
      * @return The value of the denominator of this fraction
      */
     public int getDenominator() {
-
         return denominator;
     }
 
@@ -72,8 +70,8 @@ public class Fraction {
      * Stringifies a fraction
      * @return A string form of the fraction following the numerator/denominator format
      */
-    public String toString(){ // this is an overridden method from the Object class
-        String r= "";
+    public String toString() { // this is an overridden method from the Object class
+        String r = "";
         if ( numerator == 0 )
             r = "0";
         else
@@ -94,10 +92,10 @@ public class Fraction {
     }
     /**
      * Reduces the fraction to its simplest form
-     * @return The reduced(simplest) form of this fraction
+     * @return The reduced (simplest) form of this fraction
      */
     public Fraction reduce(int wholeNumVal) {
-        Fraction r= new Fraction(wholeNumVal); // constructs a fraction
+        Fraction r = new Fraction(wholeNumVal); // constructs a fraction
         int gCF = computeGCF(); // determine the greatest common factor of numerator and denominator
         int newN= numerator/gCF;   //compute newN, the numerator's simplest form
         int newD = denominator/gCF; //compute newD, denominator's simplest form
@@ -141,7 +139,7 @@ public class Fraction {
      * Adds the two fractions
      *
      * @param addend      An addend fraction
-     * @param wholeNumVal
+     * @param wholeNumVal whole number fraction
      * @return The sum of this fraction and another fraction g
      */
     public Fraction add(Fraction addend, int wholeNumVal) {
@@ -183,6 +181,7 @@ public class Fraction {
         product.setDenominator(den);
         return product.reduce(wholeNumVal);
     }
+
     /**
      * Divides the two fractions
      * @param divisor The divisor fraction
