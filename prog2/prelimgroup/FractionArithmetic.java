@@ -1,3 +1,8 @@
+/**
+* The Fraction Arithmetic Class
+**/
+
+
 package prog2.prelimgroup;
 
 import java.util.Scanner;
