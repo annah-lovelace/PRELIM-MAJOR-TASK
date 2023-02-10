@@ -4,69 +4,62 @@ import java.util.Scanner;
 import java.lang.*;
 
 public class FractionArithmetic {
-    static Scanner keyboard = new Scanner(System.in); // static scanner object to reduce lines of code
+    public static int wholeNumVal;
 
     public static void main(String[] args) {
-        FractionArithmetic prelimProject = new FractionArithmetic();
-    } // end of main method
-
-    public FractionArithmetic() {
-        run();
-    } // end of FractionArithmetic constructor
-
-    /**
-     * Method that invokes the program to run
-     */
-    public void run() {
-        Fraction fraction = new Fraction(); //to access the operational methods of Fraction class
-        Fraction toDouble = new Fraction(); //to access toDouble method of Fraction class
+        Scanner kbd = new Scanner(System.in);
+        Fraction fraction = new Fraction(wholeNumVal); //to access the operational methods of Fraction class
+        Fraction toDouble = new Fraction(wholeNumVal); //to access toDouble method of Fraction class
         Fraction fraction1 = null;  //declares fraction1 and initializes it to value null
         Fraction fraction2 = null; //declares fraction2 and initializes it to value null
         int choice = 0;
 
         showIntro();
-        keyboard.nextLine();
+        kbd.nextLine();
 
         do {
             showMenu();
             choice = enterChoice(1, 8);
             switch (choice) {
                 case 1:
-                    fraction1 = fraction1();
+                    fraction1 = fraction1(wholeNumVal);
                     System.out.println("Press enter to continue...");
-                    keyboard.nextLine();
-                    keyboard.nextLine();
+                    kbd.nextLine();
+                    kbd.nextLine();
                     break;
                 case 2:
                     fraction2 = fraction2();
                     System.out.println("Press enter to continue...");
-                    keyboard.nextLine();
-                    keyboard.nextLine();
+                    kbd.nextLine();
+                    kbd.nextLine();
                     break;
                 case 3:
                     // outputs the sum of the two fractions
-                    System.out.println("The sum of the two fractions are " + fraction1.add(fraction2) + " or " + fraction1.add(fraction2).toDouble());
+                    System.out.println("The sum of the two fractions are " + fraction1.add(fraction2,
+                            wholeNumVal) + " or " + fraction1.add(fraction2, wholeNumVal).toDouble());
                     break;
                 case 4:
                     // outputs the difference of the two fractions
-                    System.out.println("The difference of the two fractions are " + "" + fraction1.subtract(fraction2) + " or " + fraction1.subtract(fraction2).toDouble());
+                    System.out.println("The difference of the two fractions are " + "" + fraction1.subtract(fraction2,
+                            wholeNumVal) + " or " + fraction1.subtract(fraction2, wholeNumVal).toDouble());
                     break;
                 case 5:
                     // outputs the product of the two fractions
-                    System.out.println("The product of the two fractions are " + fraction1.multiplyBy(fraction2, -1
-                    ) + " or " + fraction1.multiplyBy(fraction2, -1).toDouble());
+                    System.out.println("The product of the two fractions are " + fraction1.multiplyBy(fraction2, -1,
+                            wholeNumVal) + " or " + fraction1.multiplyBy(fraction2, -1, wholeNumVal).toDouble());
                     break;
                 case 6:
                     // outputs the quotient of the two fractions
-                    System.out.println("The quotient of the two fractions are " + fraction1.divideBy(fraction2) + " or " + fraction1.divideBy(fraction2).toDouble());
+                    System.out.println("The quotient of the two fractions are " + fraction1.divideBy(fraction2,
+                            wholeNumVal) + " or " + fraction1.divideBy(fraction2, wholeNumVal).toDouble());
                     break;
                 case 7:
                     //calls the method reduce() to reduce fraction1
-                    fraction1.reduce();
-                    System.out.println("The reduced form of Fraction 1 is " + fraction1 + " or " + fraction1.toDouble());
+                    fraction1.reduce(wholeNumVal);
+                    System.out.println("The reduced form of " + fraction1 + " : " + fraction1.toDouble());
                     //calls method reduce() to reduce fraction2
-                    fraction2.reduce();
-                    System.out.println("The reduced form of Fraction 2 is " + fraction2 + " or " + fraction2.toDouble());
+                    fraction2.reduce(wholeNumVal);
+                    System.out.println("The reduced form of " + fraction2 + " : " + fraction2.toDouble());
                     break;
                 case 8:
                     System.out.println("Thank you for using the Fraction Calculator!");
@@ -75,18 +68,12 @@ public class FractionArithmetic {
         } while (choice < 8);
     }
 
-    /**
-     * T
-     * Reads and validates user input of choice.
-     * @param min minimum value for user choice
-     * @param max maximum value for user choice
-     * @return user input of choice
-     */
     public static int enterChoice(int min, int max) {
+        Scanner kbd = new Scanner(System.in);
         int choice = 0;
         do {
             System.out.print("Input the number corresponding to your choice: ");
-            choice = keyboard.nextInt();
+            choice = kbd.nextInt();
             if (choice < min || choice > max)
                 System.out.println("Invalid choice. Please ensure that you enter a number from " + min + " to " + max + ".");
         } while (choice < min || choice > max);
@@ -111,13 +98,13 @@ public class FractionArithmetic {
         System.out.println("|        5. Multiply fractions                      |");
         System.out.println("|        6. Divide fractions                        |");
         System.out.println("|        7. Reduce fractions                        |");
-        System.out.println("|        0. Quit                                    |");
+        System.out.println("|        8. Quit                                    |");
         System.out.println("+-------------------------------------------------- +");
     }
 
-    public static Fraction fraction1() {
+    public static Fraction fraction1(int wholeNumVal) {
         Fraction operand1;
-        operand1 = enterFraction("fraction 1");
+        operand1 = enterFraction("fraction 1", wholeNumVal);
         // operand1.reduce();
         System.out.println("Fraction 1: " + operand1);
         return operand1;
@@ -126,41 +113,33 @@ public class FractionArithmetic {
     public static Fraction fraction2() {
         Fraction operand2;
         int wholeNumVal = 0;
-        operand2 = enterFraction("fraction 2");
+        operand2 = enterFraction("fraction 2", wholeNumVal);
         // operand2.reduce();
         System.out.println("Fraction 2: " + operand2);
         return operand2;
     }
 
-    /**
-     * Validates and accepts user input for the numerator and fraction.
-     *
-     * @param operand operand of the fraction
-     * @return
-     */
-    private static Fraction enterFraction(String operand) {
+    private static Fraction enterFraction(String operand, int wholeNumVal) {
         Fraction fraction = null;
         int numerator = 0, denominator;
         try {
             numerator = enterFractionData("numerator", operand);
             denominator = enterFractionData("denominator", operand);
             fraction = new Fraction(numerator, denominator);
-        } catch (NoNumeratorException noNumerator) {
-            fraction = new Fraction();
-        } catch (NoDenominatorException noDenominator) {
-            fraction = new Fraction();
-        } finally {
+        }
+        catch (NoNumeratorException noNumerator) {
+            fraction = new Fraction(wholeNumVal);
+        }
+        catch (NoDenominatorException noDenominator) {
+            fraction = new Fraction(wholeNumVal);
+        }
+        finally {
             return fraction;
-        } // end of try-catch
-    } // end of enterFraction method
+        }
+    }
 
-    /**
-     *
-     * @param part numerator or denom
-     * @param fractionInfo
-     * @return
-     */
     private static int enterFractionData(String part, String fractionInfo) {
+        Scanner keyboard = new Scanner(System.in);
         int input;
         //changed as a method that uses a loop instead of recursion.
         do {
@@ -188,4 +167,4 @@ public class FractionArithmetic {
         } while (part.equalsIgnoreCase("denominator") && input == 0);//loop will continue until denominator becomes zero
         return input;
     }
-} // end of class FractionArithmetic
+}
