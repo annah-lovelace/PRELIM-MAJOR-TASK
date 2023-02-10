@@ -6,12 +6,19 @@ import java.lang.*;
 public class FractionArithmetic {
     static Scanner keyboard = new Scanner(System.in); // static scanner object to reduce lines of code
 
+    public static void main(String[] args) {
+        FractionArithmetic prelimProject = new FractionArithmetic();
+    } // end of main method
+
+    public FractionArithmetic() {
+        run(0);
+    } // end of FractionArithmetic constructor
+
     /**
-     * Main entry point of the program
-     * @param args - command line arguments
+     * Method that invokes the program to run
      * @param wholeNumVal - whole number evaluation
      */
-    public static void main(String[] args, int wholeNumVal) {
+    public void run(int wholeNumVal) {
         Fraction fraction = new Fraction(wholeNumVal); //to access the operational methods of Fraction class
         Fraction toDouble = new Fraction(wholeNumVal); //to access toDouble method of Fraction class
         Fraction fraction1 = null;  //declares fraction1 and initializes it to value null

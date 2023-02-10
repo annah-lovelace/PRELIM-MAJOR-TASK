@@ -17,6 +17,7 @@ public class Fraction {
      */
 
      public Fraction(int wholeNumVal) {
+
          this(wholeNumVal, 1);
      }
 
@@ -180,7 +181,7 @@ public class Fraction {
         product.setNumerator(num);
         product.setDenominator(den);
         return product.reduce(wholeNumVal);
-    }
+    } // end of multipleBy method
 
     /**
      * Divides the two fractions
