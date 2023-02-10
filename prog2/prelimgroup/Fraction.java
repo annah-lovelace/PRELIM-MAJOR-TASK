@@ -1,214 +1,179 @@
-/**
- * The Fraction class
- * A template for a fraction that has the form numerator/denominator
- */
+/***
+ * Group 9:
+ * Rabang, Gebreyl
+ * Ragudos, Hannah
+ * Ramos, Jerwin Kyle
+ * Roque, Rey Daniel
+ * Roxas, Johan Rickardo
+ **/
 
 package prog2.prelimgroup;
 
-public class Fraction {
-    // object fields
-    private int numerator; // holds the numerator for this fraction
-    private int denominator; // holds the denominator for this fraction
+import java.util.Scanner;
+import java.lang.*;
 
-    /**
-     * Constructs a fraction with numerator = 0 and denominator =1.
-     * This constructor allows a Fraction with an equivalent numeric value of zero.
-     * This becomes the default constructor
-     */
+public class FractionArithmetic {
+    public static int wholeNumVal;
 
-     public Fraction() {
-         numerator = 0;
-         denominator = 1;
-     }
+    public static void main(String[] args) {
+        Scanner kbd = new Scanner(System.in);
+        Fraction fraction = new Fraction(wholeNumVal); //to access the operational methods of Fraction class
+        Fraction toDouble = new Fraction(wholeNumVal); //to access toDouble method of Fraction class
+        Fraction fraction1 = null;  //declares fraction1 and initializes it to value null
+        Fraction fraction2 = null; //declares fraction2 and initializes it to value null
+        int choice = 0;
 
-    /**
-     * Constructs a Fraction using a given numerator and denominator
-     * Example: Fraction f = new Fraction( 3, 8);
-     * @param numerator value of the numerator
-     * @param denominator value of the denominator
-     */
-    public Fraction(int numerator, int denominator) {
-        this.numerator = numerator;
-        this.denominator = denominator;
+        showIntro();
+        kbd.nextLine();
 
-    }
-
-    /**
-     * Mutator/Setter Method
-     * Sets the value of the numerator of this fraction to n
-     * @param n The numerator to assign
-     */
-    public void setNumerator(int n) {
-        numerator = n;
-    }
-
-    /**
-     * Accessor/Getter Method
-     * @return The value of the numerator of this fraction
-     */
-    public int getNumerator() {
-        return numerator;
-    }
-
-    /**
-     * Mutator/Setter Method
-     * Sets the value of the denominator of this fraction to d
-     * @param d The denominator to assign
-     */
-    public void setDenominator(int d) {
-        denominator=d;
-    }
-
-    /**
-     * Accessor/Getter Method
-     * @return The value of the denominator of this fraction
-     */
-    public int getDenominator() {
-        return denominator;
-    }
-
-    /**
-     * Stringifies a fraction
-     * @return A string form of the fraction following the numerator/denominator format
-     */
-    public String toString() { // this is an overridden method from the Object class
-        String r = "";
-        if ( numerator == 0 )
-            r = "0";
-        else
-            if (denominator==1)
-                r= numerator +"";
-            else
-                r= (numerator + "/" + denominator );
-        return r;
-    }
-
-    /**
-     * Converts the fraction to a decimal form
-     * @return A decimal equivalent of this fraction. (e.g. if this fraction 1/4, 0.25 is returned)
-     */
-    public double toDouble() {
-
-        return (double) numerator/denominator;
-    }
-    /**
-     * Reduces the fraction to its simplest form
-     * @return The reduced (simplest) form of this fraction
-     */
-    public Fraction reduce() {
-        Fraction r = new Fraction(); // constructs a fraction
-        int gCF = computeGCF(); // determine the greatest common factor of numerator and denominator
-        int newN= numerator / gCF;   //compute newN, the numerator's simplest form
-        int newD = denominator / gCF; //compute newD, denominator's simplest form
-        r.setNumerator(newN); // sets the new value of the numerator in its simplest form
-        r.setDenominator(newD);// sets the new value of the denominator in its simplest form newD
-        return r; // returns the simplest form of this fraction
-    }
-    /**
-     * Computes the greatest common factor of the numerator and denominator
-     * @return The greatest common factor
-     */
-    private  int computeGCF(){
-        int gCF = 1;
-        int lesser = 1;
-        boolean value = false;
-        lesser = computeLesser( numerator, denominator);
-        for (int index= lesser; (index >=1 && !value); index--){
-            if (numerator % index == 0 && denominator % index == 0) {
-                value = true;
-                gCF = index;
+        do {
+            showMenu();
+            choice = enterChoice(1, 8);
+            switch (choice) {
+                case 1:
+                    fraction1 = fraction1(wholeNumVal);
+                    System.out.println("Press enter to continue...");
+                    kbd.nextLine();
+                    kbd.nextLine();
+                    break;
+                case 2:
+                    fraction2 = fraction2();
+                    System.out.println("Press enter to continue...");
+                    kbd.nextLine();
+                    kbd.nextLine();
+                    break;
+                case 3:
+                    // outputs the sum of the two fractions
+                    System.out.println("The sum of the two fractions are " + fraction1.add(fraction2,
+                            wholeNumVal) + " or " + fraction1.add(fraction2, wholeNumVal).toDouble());
+                    break;
+                case 4:
+                    // outputs the difference of the two fractions
+                    System.out.println("The difference of the two fractions are " + "" + fraction1.subtract(fraction2,
+                            wholeNumVal) + " or " + fraction1.subtract(fraction2, wholeNumVal).toDouble());
+                    break;
+                case 5:
+                    // outputs the product of the two fractions
+                    System.out.println("The product of the two fractions are " + fraction1.multiplyBy(fraction2, -1,
+                            wholeNumVal) + " or " + fraction1.multiplyBy(fraction2, -1, wholeNumVal).toDouble());
+                    break;
+                case 6:
+                    // outputs the quotient of the two fractions
+                    System.out.println("The quotient of the two fractions are " + fraction1.divideBy(fraction2,
+                            wholeNumVal) + " or " + fraction1.divideBy(fraction2, wholeNumVal).toDouble());
+                    break;
+                case 7:
+                    //calls the method reduce() to reduce fraction1
+                    fraction1.reduce(wholeNumVal);
+                    System.out.println("The reduced form of " + fraction1 + " : " + fraction1.toDouble());
+                    //calls method reduce() to reduce fraction2
+                    fraction2.reduce(wholeNumVal);
+                    System.out.println("The reduced form of " + fraction2 + " : " + fraction2.toDouble());
+                    break;
+                case 8:
+                    System.out.println("Thank you for using the Fraction Calculator!");
+                    System.exit(0);
             }
+        } while (choice < 8);
+    }
+
+    public static int enterChoice(int min, int max) {
+        Scanner kbd = new Scanner(System.in);
+        int choice = 0;
+        do {
+            System.out.print("Input the number corresponding to your choice: ");
+            choice = kbd.nextInt();
+            if (choice < min || choice > max)
+                System.out.println("Invalid choice. Please ensure that you enter a number from " + min + " to " + max + ".");
+        } while (choice < min || choice > max);
+        return (choice);
+    }
+
+    public static void showIntro() {
+        System.out.println("+-------------------------------------------------- +");
+        System.out.println("|                Welcome to our                     |");
+        System.out.println("|              Fraction Calculator                  |");
+        System.out.println("+-------------------------------------------------- +");
+        System.out.println("             Press enter to continue...              ");
+    }
+
+    public static void showMenu() {
+        System.out.println("+-------------------------------------------------- +");
+        System.out.println("| What do you want to do?                           |");
+        System.out.println("|        1. Enter the value of fraction 1           |");
+        System.out.println("|        2. Enter the value of fraction 2           |");
+        System.out.println("|        3. Add fractions                           |");
+        System.out.println("|        4. Subtract fractions                      |");
+        System.out.println("|        5. Multiply fractions                      |");
+        System.out.println("|        6. Divide fractions                        |");
+        System.out.println("|        7. Reduce fractions                        |");
+        System.out.println("|        8. Quit                                    |");
+        System.out.println("+-------------------------------------------------- +");
+    }
+
+    public static Fraction fraction1(int wholeNumVal) {
+        Fraction operand1;
+        operand1 = enterFraction("fraction 1", wholeNumVal);
+        // operand1.reduce();
+        System.out.println("Fraction 1: " + operand1);
+        return operand1;
+    }
+
+    public static Fraction fraction2() {
+        Fraction operand2;
+        int wholeNumVal = 0;
+        operand2 = enterFraction("fraction 2", wholeNumVal);
+        // operand2.reduce();
+        System.out.println("Fraction 2: " + operand2);
+        return operand2;
+    }
+
+    private static Fraction enterFraction(String operand, int wholeNumVal) {
+        Fraction fraction = null;
+        int numerator = 0, denominator;
+        try {
+            numerator = enterFractionData("numerator", operand);
+            denominator = enterFractionData("denominator", operand);
+            fraction = new Fraction(numerator, denominator);
         }
-        return gCF;
+        catch (NoNumeratorException noNumerator) {
+            fraction = new Fraction(wholeNumVal);
+        }
+        catch (NoDenominatorException noDenominator) {
+            fraction = new Fraction(wholeNumVal);
+        }
+        finally {
+            return fraction;
+        }
     }
 
-    /**
-     * Returns the lesser number of the two parameters
-     * @param n1 The first number to compare
-     * @param n2 The second number to compare
-     * @return The lesser value of integer between n1 and n2
-     */
-    private int computeLesser (int n1, int n2) {
-        int lesser = n1;
-        if (n1 < n2)
-            lesser = n1;
-        else
-            lesser = n2;
-        return lesser;
-    }
-    /**
-     * Adds the two fractions
-     *
-     * @param addend      An addend fraction
-     * @return The sum of this fraction and another fraction g
-     */
-    public Fraction add(Fraction addend) {
-        Fraction sum = new Fraction();
-        int den = denominator * addend.getDenominator();
-        int num = den/denominator*numerator + den/addend.getDenominator()*addend.getNumerator();
-        sum.setNumerator(num);
-        sum.setDenominator(den);
-        return sum.reduce();
-    }
-    /**
-     * Subtracts the two fractions
-     *
-     * @param subtrahend  The subtrahend fraction
-     * @return The difference of this fraction and another fraction
-     */
-    public Fraction subtract(Fraction subtrahend) {
-        Fraction difference = new Fraction();
-        int num = numerator * subtrahend.getDenominator() - subtrahend.getNumerator() * denominator;
-        int den = denominator * subtrahend.getDenominator();
-        difference.setNumerator(num);
-        difference.setDenominator(den);
-        return difference.reduce();
-    }
-    /**
-     * Multiplies the two fractions
-     *
-     * @param multiplier The multiplier fraction
-     * @param i
-     * @return The product of this fraction and another fraction
-     */
-    public Fraction multiplyBy(Fraction multiplier, int i) {
-        Fraction product = new Fraction();
-        int num = numerator * multiplier.getNumerator();
-        int den = denominator * multiplier.getDenominator();
-        product.setNumerator(num);
-        product.setDenominator(den);
-        return product.reduce();
-    } // end of multipleBy method
+    private static int enterFractionData(String part, String fractionInfo) {
+        Scanner keyboard = new Scanner(System.in);
+        int input;
+        //changed as a method that uses a loop instead of recursion.
+        do {
+            try {
+                System.out.print("Enter " + part + " of " + fractionInfo + ": ");
+                input = Integer.parseInt(keyboard.nextLine());
 
-    /**
-     * Divides the two fractions
-     * @param divisor The divisor fraction
-     * @return The quotient of this fraction and another fraction
-     **/
-    public Fraction divideBy(Fraction divisor) {
-        Fraction quotient = new Fraction();
-        int num = numerator * divisor.getDenominator();
-        int den = denominator * divisor.getNumerator();
-        quotient.setNumerator(num);
-        quotient.setDenominator(den);
-        return quotient.reduce();
+                /* If zero is the denominator entered, the user needs to change it. */
+
+                if (part.equalsIgnoreCase("denominator") && input == 0)
+                    System.out.println("Entered denominator is zero. Operations will be undefined. Enter a new one.");
+            } catch (Exception exc) {
+                if (part.equalsIgnoreCase("numerator")) {
+                    throw new NoNumeratorException();
+                }
+                else {
+                    try {
+                        throw new NoDenominatorException();
+                    }
+                    catch (NoDenominatorException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        } while (part.equalsIgnoreCase("denominator") && input == 0);//loop will continue until denominator becomes zero
+        return input;
     }
-
-    /**
-     * This part was made by ROXAS, Johan Rickardo on 7 February 2023.
-     * Calculates the greatest common divisor of two numbers, without listing the divisor of either number.
-     * This method uses Euclid's Algorithm.
-     */
-    private void computeGCD() {
-        int remainder = 0;
-        remainder = numerator % denominator;
-        if (remainder == 0)
-            System.out.println("Greatest common divisor: " + denominator);
-        else {
-            numerator = denominator;
-            denominator = remainder;
-            computeGCD();
-        } // end of else
-    } // end of computeGCD method
-} // end of Fraction class
-
+}
