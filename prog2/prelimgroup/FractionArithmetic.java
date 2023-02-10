@@ -1,7 +1,11 @@
-/**
-* The Fraction Arithmetic Class
-**/
-
+/***
+ * Group 9:
+ * Rabang, Gebreyl
+ * Ragudos, Hannah
+ * Ramos, Jerwin Kyle
+ * Roque, Rey Daniel
+ * Roxas, Johan Rickardo
+ **/
 
 package prog2.prelimgroup;
 
@@ -9,7 +13,9 @@ import java.util.Scanner;
 import java.lang.*;
 
 public class FractionArithmetic {
-    public static void main(String[] args, int wholeNumVal) {
+    public static int wholeNumVal;
+
+    public static void main(String[] args) {
         Scanner kbd = new Scanner(System.in);
         Fraction fraction = new Fraction(wholeNumVal); //to access the operational methods of Fraction class
         Fraction toDouble = new Fraction(wholeNumVal); //to access toDouble method of Fraction class
@@ -59,10 +65,10 @@ public class FractionArithmetic {
                 case 7:
                     //calls the method reduce() to reduce fraction1
                     fraction1.reduce(wholeNumVal);
-                    System.out.println("The reduced form of Fraction 1 is " + fraction1 + " or " + fraction1.toDouble());
+                    System.out.println("The reduced form of " + fraction1 + " : " + fraction1.toDouble());
                     //calls method reduce() to reduce fraction2
                     fraction2.reduce(wholeNumVal);
-                    System.out.println("The reduced form of Fraction 2 is " + fraction2 + " or " + fraction2.toDouble());
+                    System.out.println("The reduced form of " + fraction2 + " : " + fraction2.toDouble());
                     break;
                 case 8:
                     System.out.println("Thank you for using the Fraction Calculator!");
@@ -101,7 +107,7 @@ public class FractionArithmetic {
         System.out.println("|        5. Multiply fractions                      |");
         System.out.println("|        6. Divide fractions                        |");
         System.out.println("|        7. Reduce fractions                        |");
-        System.out.println("|        0. Quit                                    |");
+        System.out.println("|        8. Quit                                    |");
         System.out.println("+-------------------------------------------------- +");
     }
 
@@ -170,4 +176,20 @@ public class FractionArithmetic {
         } while (part.equalsIgnoreCase("denominator") && input == 0);//loop will continue until denominator becomes zero
         return input;
     }
-}
+    /**
+     * This part was made by ROXAS, Johan Rickardo on 7 February 2023.
+     * Calculates the greatest common divisor of two numbers, without listing the divisor of either number.
+     * This method uses Euclid's Algorithm.
+     */
+    private void computeGCD() {
+        int remainder = 0;
+        remainder = numerator % denominator;
+        if (remainder == 0)
+            System.out.println("Greatest common divisor: " + denominator);
+        else {
+            numerator = denominator;
+            denominator = remainder;
+            computeGCD();
+        } // end of else
+    } // end of computeGCD method
+} // end of Fraction class
