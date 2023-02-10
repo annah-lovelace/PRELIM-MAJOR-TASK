@@ -11,16 +11,15 @@ public class FractionArithmetic {
     } // end of main method
 
     public FractionArithmetic() {
-        run(0);
+        run();
     } // end of FractionArithmetic constructor
 
     /**
      * Method that invokes the program to run
-     * @param wholeNumVal - whole number evaluation
      */
-    public void run(int wholeNumVal) {
-        Fraction fraction = new Fraction(wholeNumVal); //to access the operational methods of Fraction class
-        Fraction toDouble = new Fraction(wholeNumVal); //to access toDouble method of Fraction class
+    public void run() {
+        Fraction fraction = new Fraction(); //to access the operational methods of Fraction class
+        Fraction toDouble = new Fraction(); //to access toDouble method of Fraction class
         Fraction fraction1 = null;  //declares fraction1 and initializes it to value null
         Fraction fraction2 = null; //declares fraction2 and initializes it to value null
         int choice = 0;
@@ -33,7 +32,7 @@ public class FractionArithmetic {
             choice = enterChoice(1, 8);
             switch (choice) {
                 case 1:
-                    fraction1 = fraction1(wholeNumVal);
+                    fraction1 = fraction1();
                     System.out.println("Press enter to continue...");
                     keyboard.nextLine();
                     keyboard.nextLine();
@@ -46,30 +45,27 @@ public class FractionArithmetic {
                     break;
                 case 3:
                     // outputs the sum of the two fractions
-                    System.out.println("The sum of the two fractions are " + fraction1.add(fraction2,
-                            wholeNumVal) + " or " + fraction1.add(fraction2, wholeNumVal).toDouble());
+                    System.out.println("The sum of the two fractions are " + fraction1.add(fraction2) + " or " + fraction1.add(fraction2).toDouble());
                     break;
                 case 4:
                     // outputs the difference of the two fractions
-                    System.out.println("The difference of the two fractions are " + "" + fraction1.subtract(fraction2,
-                            wholeNumVal) + " or " + fraction1.subtract(fraction2, wholeNumVal).toDouble());
+                    System.out.println("The difference of the two fractions are " + "" + fraction1.subtract(fraction2) + " or " + fraction1.subtract(fraction2).toDouble());
                     break;
                 case 5:
                     // outputs the product of the two fractions
-                    System.out.println("The product of the two fractions are " + fraction1.multiplyBy(fraction2, -1,
-                            wholeNumVal) + " or " + fraction1.multiplyBy(fraction2, -1, wholeNumVal).toDouble());
+                    System.out.println("The product of the two fractions are " + fraction1.multiplyBy(fraction2, -1
+                    ) + " or " + fraction1.multiplyBy(fraction2, -1).toDouble());
                     break;
                 case 6:
                     // outputs the quotient of the two fractions
-                    System.out.println("The quotient of the two fractions are " + fraction1.divideBy(fraction2,
-                            wholeNumVal) + " or " + fraction1.divideBy(fraction2, wholeNumVal).toDouble());
+                    System.out.println("The quotient of the two fractions are " + fraction1.divideBy(fraction2) + " or " + fraction1.divideBy(fraction2).toDouble());
                     break;
                 case 7:
                     //calls the method reduce() to reduce fraction1
-                    fraction1.reduce(wholeNumVal);
+                    fraction1.reduce();
                     System.out.println("The reduced form of Fraction 1 is " + fraction1 + " or " + fraction1.toDouble());
                     //calls method reduce() to reduce fraction2
-                    fraction2.reduce(wholeNumVal);
+                    fraction2.reduce();
                     System.out.println("The reduced form of Fraction 2 is " + fraction2 + " or " + fraction2.toDouble());
                     break;
                 case 8:
@@ -119,9 +115,9 @@ public class FractionArithmetic {
         System.out.println("+-------------------------------------------------- +");
     }
 
-    public static Fraction fraction1(int wholeNumVal) {
+    public static Fraction fraction1() {
         Fraction operand1;
-        operand1 = enterFraction("fraction 1", wholeNumVal);
+        operand1 = enterFraction("fraction 1");
         // operand1.reduce();
         System.out.println("Fraction 1: " + operand1);
         return operand1;
@@ -130,7 +126,7 @@ public class FractionArithmetic {
     public static Fraction fraction2() {
         Fraction operand2;
         int wholeNumVal = 0;
-        operand2 = enterFraction("fraction 2", wholeNumVal);
+        operand2 = enterFraction("fraction 2");
         // operand2.reduce();
         System.out.println("Fraction 2: " + operand2);
         return operand2;
@@ -138,11 +134,11 @@ public class FractionArithmetic {
 
     /**
      * Validates and accepts user input for the numerator and fraction.
+     *
      * @param operand operand of the fraction
-     * @param wholeNumVal whole number fraction
      * @return
      */
-    private static Fraction enterFraction(String operand, int wholeNumVal) {
+    private static Fraction enterFraction(String operand) {
         Fraction fraction = null;
         int numerator = 0, denominator;
         try {
@@ -150,9 +146,9 @@ public class FractionArithmetic {
             denominator = enterFractionData("denominator", operand);
             fraction = new Fraction(numerator, denominator);
         } catch (NoNumeratorException noNumerator) {
-            fraction = new Fraction(wholeNumVal);
+            fraction = new Fraction();
         } catch (NoDenominatorException noDenominator) {
-            fraction = new Fraction(wholeNumVal);
+            fraction = new Fraction();
         } finally {
             return fraction;
         } // end of try-catch
@@ -160,7 +156,7 @@ public class FractionArithmetic {
 
     /**
      *
-     * @param part
+     * @param part numerator or denom
      * @param fractionInfo
      * @return
      */

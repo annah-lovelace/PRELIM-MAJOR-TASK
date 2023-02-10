@@ -16,9 +16,9 @@ public class Fraction {
      * This becomes the default constructor
      */
 
-     public Fraction(int wholeNumVal) {
-
-         this(wholeNumVal, 1);
+     public Fraction() {
+         numerator = 0;
+         denominator = 1;
      }
 
     /**
@@ -95,11 +95,11 @@ public class Fraction {
      * Reduces the fraction to its simplest form
      * @return The reduced (simplest) form of this fraction
      */
-    public Fraction reduce(int wholeNumVal) {
-        Fraction r = new Fraction(wholeNumVal); // constructs a fraction
+    public Fraction reduce() {
+        Fraction r = new Fraction(); // constructs a fraction
         int gCF = computeGCF(); // determine the greatest common factor of numerator and denominator
-        int newN= numerator/gCF;   //compute newN, the numerator's simplest form
-        int newD = denominator/gCF; //compute newD, denominator's simplest form
+        int newN= numerator / gCF;   //compute newN, the numerator's simplest form
+        int newD = denominator / gCF; //compute newD, denominator's simplest form
         r.setNumerator(newN); // sets the new value of the numerator in its simplest form
         r.setDenominator(newD);// sets the new value of the denominator in its simplest form newD
         return r; // returns the simplest form of this fraction
@@ -140,62 +140,58 @@ public class Fraction {
      * Adds the two fractions
      *
      * @param addend      An addend fraction
-     * @param wholeNumVal whole number fraction
      * @return The sum of this fraction and another fraction g
      */
-    public Fraction add(Fraction addend, int wholeNumVal) {
-        Fraction sum = new Fraction(wholeNumVal);
+    public Fraction add(Fraction addend) {
+        Fraction sum = new Fraction();
         int den = denominator * addend.getDenominator();
         int num = den/denominator*numerator + den/addend.getDenominator()*addend.getNumerator();
         sum.setNumerator(num);
         sum.setDenominator(den);
-        return sum.reduce(wholeNumVal);
+        return sum.reduce();
     }
     /**
      * Subtracts the two fractions
      *
      * @param subtrahend  The subtrahend fraction
-     * @param wholeNumVal
      * @return The difference of this fraction and another fraction
      */
-    public Fraction subtract(Fraction subtrahend, int wholeNumVal) {
-        Fraction difference = new Fraction(wholeNumVal);
+    public Fraction subtract(Fraction subtrahend) {
+        Fraction difference = new Fraction();
         int num = numerator * subtrahend.getDenominator() - subtrahend.getNumerator() * denominator;
         int den = denominator * subtrahend.getDenominator();
         difference.setNumerator(num);
         difference.setDenominator(den);
-        return difference.reduce(wholeNumVal);
+        return difference.reduce();
     }
     /**
      * Multiplies the two fractions
      *
-     * @param multiplier  The multiplier fraction
+     * @param multiplier The multiplier fraction
      * @param i
-     * @param wholeNumVal
      * @return The product of this fraction and another fraction
      */
-    public Fraction multiplyBy(Fraction multiplier, int i, int wholeNumVal) {
-        Fraction product = new Fraction(wholeNumVal);
+    public Fraction multiplyBy(Fraction multiplier, int i) {
+        Fraction product = new Fraction();
         int num = numerator * multiplier.getNumerator();
         int den = denominator * multiplier.getDenominator();
         product.setNumerator(num);
         product.setDenominator(den);
-        return product.reduce(wholeNumVal);
+        return product.reduce();
     } // end of multipleBy method
 
     /**
      * Divides the two fractions
      * @param divisor The divisor fraction
-     * @param wholeNumVal
      * @return The quotient of this fraction and another fraction
      **/
-    public Fraction divideBy(Fraction divisor, int wholeNumVal) {
-        Fraction quotient = new Fraction(wholeNumVal);
+    public Fraction divideBy(Fraction divisor) {
+        Fraction quotient = new Fraction();
         int num = numerator * divisor.getDenominator();
         int den = denominator * divisor.getNumerator();
         quotient.setNumerator(num);
         quotient.setDenominator(den);
-        return quotient.reduce(wholeNumVal);
+        return quotient.reduce();
     }
 
     /**
